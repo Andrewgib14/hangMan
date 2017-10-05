@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hang-Man</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+
+
+
+<body>
+
+    <div class="title-container">
+        <h1 class="title">Hang-Man</h1>
+        <div>
+            <a href="/newgame">New Game</a>
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="main-content">
+
+            {{#turns}}
+            <h2 class="">Turns Left: {{.}}</h2>{{/turns}}
+
+            <div class="wrong-guesses">
+                <h2 class="wrong">Wrong Guesses:</h2><br>
+            </div>
+
+            <div class="wrong-letter-container">
+                <p class="wrong-letter">{{#incorrectGuesses}}{{.}}&nbsp;{{/incorrectGuesses}}</p>
+            </div>
+            <p class="no-guess">{{^incorrectGuesses}}No Guesses Yet {{/incorrectGuesses}}</p>
+            <form action="/word/guess" method="POST">
+                <div class="letter-blanks">
+                    <h3>{{#display}}<span class="letterGuess"> {{.}} </span>{{/display}}</h3>
+                </div>
+                <input type="text" name="letterGuess" placeholder="Guess A Letter" maxlength=1 pattern="[a-z]" autocomplete="off" title="Must be a letter!"
+                    required>
+                <button type="submit">Guess</button> {{#word}}
+                <h2>{{#message}}{{.}}{{/message}}</h2>
+            </form>
+        </div>
+    </div>
+    {{/word}}
+</body>
+
+</html>

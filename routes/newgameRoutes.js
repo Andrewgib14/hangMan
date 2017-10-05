@@ -11,5 +11,22 @@ function getRandomInt(min, max) {
 }
 
 newgameRoutes.get("/", function (req, res) {
+    let randomWord = words[getRandomInt(0, words.length - 1)];
+    console.log(randomWord);
+    let wordGame = {};
+    wordGame.word = randomWord;
+    wordGame.display = [];
+    wordGame.incorrectGuesses = [];
+    wordGame.correctGuesses = [];
+    wordGame.turns = 8;
+    for (let i = 0; i < wordGame.word.length; i++) {
+        wordGame.display.push("_");
+    }
+    console.log("turns = ", wordGame.turns);
+    req.session.wordGame = wordGame;
+    return res.render("game", wordGame);
+});
 
-})
+
+
+module.exports = newgameRoutes;
